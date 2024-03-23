@@ -3,7 +3,23 @@
     <style name="Base.Theme.Parking_Management" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowIsTranslucent">true</item>
+
     </style>
 
-    <style name="Theme.Parking_Management" parent="Base.Theme.Parking_Management" />
+    <style name="Theme.Parking_Management" parent="Base.Theme.Parking_Management" >
+
+        <item name="android:windowIsTranslucent">true</item>
+
+
+    </style>
+
+    <style name="CustomButtonStyle" parent="Widget.AppCompat.Button">
+        <!-- Set button background color -->
+        <item name="android:background">#000000</item>
+        <!-- Set button text color -->
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+
 </resources>
