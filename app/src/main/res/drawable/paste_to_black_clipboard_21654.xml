@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="256dp"
+    android:height="256dp"
+    android:viewportWidth="256"
+    android:viewportHeight="256">
+  <path
+      android:pathData="M125.2,32.16c0.74,-3.36 0.58,-7.06 -2.19,-11.23C120.14,16.61 115.53,13.64 110.35,13.65c-8.4,0.01 -15.21,6.82 -15.21,15.22c0,1.13 0.14,2.23 0.38,3.29L81.43,32.16c-2.56,0 -4.64,2.08 -4.64,4.64l0,10.73c0,5.05 4.1,9.15 9.15,9.15l48.84,0c5.05,0 9.15,-4.1 9.15,-9.15L143.93,36.8c0,-2.56 -2.08,-4.64 -4.64,-4.64L125.2,32.16z"
+      android:strokeLineJoin="miter"
+      android:strokeWidth="2.53"
+      android:fillColor="#000000"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"
+      android:strokeLineCap="butt"/>
+  <path
+      android:pathData="M206.44,96.53l-88.2,0c-5.81,0 -10.52,4.71 -10.52,10.52L107.72,230.82c0,5.81 4.71,10.52 10.52,10.52l88.2,0c5.81,0 10.52,-4.71 10.52,-10.52L216.97,107.06C216.97,101.25 212.25,96.53 206.44,96.53zM163.52,204.58L130.59,204.58c-2.79,0 -5.06,-2.27 -5.06,-5.06s2.27,-5.06 5.06,-5.06l32.94,0c2.79,0 5.06,2.27 5.06,5.06S166.31,204.58 163.52,204.58zM194.1,174L130.59,174c-2.79,0 -5.06,-2.27 -5.06,-5.06s2.27,-5.06 5.06,-5.06l63.51,0c2.79,0 5.06,2.27 5.06,5.06S196.89,174 194.1,174zM194.1,143.42L130.59,143.42c-2.79,0 -5.06,-2.27 -5.06,-5.06s2.27,-5.06 5.06,-5.06l63.51,0c2.79,0 5.06,2.27 5.06,5.06S196.89,143.42 194.1,143.42z"
+      android:strokeLineJoin="miter"
+      android:strokeWidth="2.53"
+      android:fillColor="#000000"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"
+      android:strokeLineCap="butt"/>
+  <path
+      android:pathData="M172.45,41.47l-18.41,0l0,6.06c0,10.63 -8.65,19.27 -19.27,19.27L85.93,66.8c-10.63,0 -19.27,-8.65 -19.27,-19.27l0,-6.06l-18.41,0c-5.65,0 -10.23,4.58 -10.23,10.23l0,161.06c0,5.65 4.58,10.23 10.23,10.23l49.34,0L97.6,107.06c0,-11.39 9.26,-20.65 20.64,-20.65l64.44,0l0,-34.71C182.69,46.05 178.1,41.47 172.45,41.47z"
+      android:strokeLineJoin="miter"
+      android:strokeWidth="2.53"
+      android:fillColor="#000000"
+      android:fillType="nonZero"
+      android:strokeColor="#00000000"
+      android:strokeLineCap="butt"/>
+</vector>
