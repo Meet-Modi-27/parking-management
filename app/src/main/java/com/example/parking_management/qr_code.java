@@ -1,5 +1,7 @@
 package com.example.parking_management;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
@@ -82,9 +84,33 @@ public class qr_code extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pushData(dropDownItem,dropDownItem1);
+                secondCounter(dropDownItem,dropDownItem1);
             }
         });
     }
+
+    private void secondCounter(String loc, String vehicle) {
+        DatabaseReference counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child("Temp_Counter").child(loc);
+        counterRef.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                Long currentValue = mutableData.getValue(Long.class);
+                if (currentValue == null) {
+                    mutableData.setValue(1);
+                } else {
+                    mutableData.setValue(currentValue + 1);
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+
+            }
+        });
+    }
+
     private void updateSelectedItem(String selectedItem) {
         dropDownItem = selectedItem;
     }private void updateSelectedItem1(String selectedItem) {
@@ -93,7 +119,7 @@ public class qr_code extends AppCompatActivity {
 
     private void pushData(String loc1, String vehicle1) {
         // Get a reference to the counter node for the specific location in your Firebase Database
-        DatabaseReference counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child(loc1);
+        DatabaseReference counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child("Head_Counter").child(loc1);
 
         // Increment the counter value for the specific location
         counterRef.runTransaction(new Transaction.Handler() {
@@ -101,10 +127,8 @@ public class qr_code extends AppCompatActivity {
             public Transaction.Result doTransaction(MutableData mutableData) {
                 Long currentValue = mutableData.getValue(Long.class);
                 if (currentValue == null) {
-                    // Initialize the counter if it doesn't exist
                     mutableData.setValue(1);
                 } else {
-                    // Increment the counter
                     mutableData.setValue(currentValue + 1);
                 }
                 return Transaction.success(mutableData);
@@ -123,10 +147,10 @@ public class qr_code extends AppCompatActivity {
                         String newKey = loc1 + "_" + counterValue;
 
                         // Get a reference to the 'qr' node using the location
-                        DatabaseReference qrRef = FirebaseDatabase.getInstance().getReference().child("qr");
+                        DatabaseReference qrRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty");
 
                         // Create a new spotModel instance with the updated key
-                        spotModel SpotModel = new spotModel(loc1, vehicle1, newKey, true);
+                        spotModel SpotModel = new spotModel(loc1, vehicle1, newKey,"");
 
                         // Push the data to Firebase
                         qrRef.child(newKey).setValue(SpotModel);

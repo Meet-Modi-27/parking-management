@@ -123,7 +123,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Scan To Book"
+                                android:text="Scan &amp; Park"
                                 android:textAlignment="center"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
@@ -143,7 +143,7 @@
                         android:layout_column="1"
                         android:layout_row="0"
                         android:layout_margin="10dp"
-                        android:id="@+id/history">
+                        android:id="@+id/exit">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -155,13 +155,13 @@
                             <ImageView
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
-                                android:src="@drawable/ticket_icon"
+                                android:src="@drawable/qr_code_scan_icon"
                                 android:layout_gravity="center"/>
                             <TextView
                                 android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Report"
+                                android:text="Scan &amp; Exit"
                                 android:textAlignment="center"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
@@ -252,5 +252,11 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/flag"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
 
 </LinearLayout>

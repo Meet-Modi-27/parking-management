@@ -2,18 +2,17 @@ package com.example.parking_management.models;
 
 public class spotModel {
 
-    String location,spotType,spotId;
-    Boolean isEmpty;
+    String location,spotType,spotId,userId;
 
     spotModel(){
 
     }
 
-    public spotModel(String location, String spotType, String spotId, Boolean isEmpty) {
+    public spotModel(String location, String spotType, String spotId, String userId) {
         this.location = location;
         this.spotType = spotType;
         this.spotId = spotId;
-        this.isEmpty = isEmpty;
+        this.userId = userId;
     }
 
     public String getLocation() {
@@ -40,11 +39,11 @@ public class spotModel {
         this.spotId = spotId;
     }
 
-    public Boolean getEmpty() {
-        return isEmpty;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setEmpty(Boolean empty) {
-        isEmpty = empty;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

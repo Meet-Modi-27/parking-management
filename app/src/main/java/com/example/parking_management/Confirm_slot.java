@@ -1,6 +1,7 @@
 package com.example.parking_management;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -12,10 +13,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.parking_management.models.confirmModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -27,12 +32,10 @@ import java.util.Locale;
 public class Confirm_slot extends AppCompatActivity {
 
     private String userId, spotId, loc;
-    private DatabaseReference userRef, dbRef,vehicleRef;
-    private boolean onDataChangeCalled = false; // Flag to track if onDataChange was called
+    private DatabaseReference userRef, dbRef,vehicleRef,spotRef,counterRef;
+    private boolean onDataChangeCalled = false;
     AutoCompleteTextView vehicleAutoCompleteTextView;
-    List<String> vehicleNumbers;
     Button confirm;
-    String dropDownItem;
 
 
     @Override
@@ -55,25 +58,49 @@ public class Confirm_slot extends AppCompatActivity {
         userRef = FirebaseDatabase.getInstance().getReference().child("users").child("Reg_Users").child(userId);
         dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("bookings").child(userId);
         vehicleRef = FirebaseDatabase.getInstance().getReference().child("users").child("Reg_vehicles").child(userId);
-        List<String> vehicleNumbers = new ArrayList<>(); // Initialize list to store vehicle numbers
+        spotRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(spotId);
+        counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child("Temp_Counter").child(loc);
 
-        vehicleRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        spotRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Ensure vehicleNumbers list is not null
-                if (vehicleNumbers != null) {
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String vehicleNumber = snapshot.child("number").getValue(String.class);
-                        Log.d("FirebaseData", "Number: " + vehicleNumber);
-                        // Add vehicle number to the list
-                        vehicleNumbers.add(vehicleNumber);
-                    }
-                    // Populate AutoCompleteTextView with vehicle numbers
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(Confirm_slot.this, android.R.layout.simple_dropdown_item_1line, vehicleNumbers);
-                    vehicleAutoCompleteTextView.setAdapter(adapter);
+                if (dataSnapshot.exists()) {
+                    String spotType = dataSnapshot.child("spotType").getValue(String.class);
+                    addVehicleData(spotType);
                 } else {
-                    Log.e("FirebaseData", "vehicleNumbers list is null");
+                    // Handle the case if the spotId does not exist
+                    Toast.makeText(Confirm_slot.this, "Spot is not Empty", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
+            }
+
+            private void addVehicleData(String spotType) {
+                List<String> vehicleNumbers = new ArrayList<>();
+
+                vehicleRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String vehicleNumber = snapshot.child("number").getValue(String.class);
+                            String vehicleType = snapshot.child("type").getValue(String.class);
+
+                            // Check if the vehicle type matches the spot type
+                            if (vehicleType != null && vehicleType.equals(spotType)) {
+                                Log.d("FirebaseData", "Number: " + vehicleNumber);
+                                // Add vehicle number to the list
+                                vehicleNumbers.add(vehicleNumber);
+                            }
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(Confirm_slot.this, android.R.layout.simple_dropdown_item_1line, vehicleNumbers);
+                        vehicleAutoCompleteTextView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("FirebaseData", "Failed to read value.", error.toException());
+                    }
+                });
             }
 
             @Override
@@ -86,7 +113,7 @@ public class Confirm_slot extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String vehicleNumber = vehicleAutoCompleteTextView.getText().toString(); // Get selected vehicle number
+                String vehicleNumber = vehicleAutoCompleteTextView.getText().toString();
 
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -101,9 +128,84 @@ public class Confirm_slot extends AppCompatActivity {
                             confirmModel confirm = new confirmModel(userId, userName, spotId, timeStamp, loc, vehicleNumber);
                             dbRef.push().setValue(confirm);
                             Toast.makeText(Confirm_slot.this, "Booking Confirmed!!!", Toast.LENGTH_SHORT).show();
+                            updateQR();
+                            updateCounter();
                             finish();
                         }
                     }
+
+                    private void updateCounter() {
+                        counterRef.runTransaction(new Transaction.Handler() {
+                            @NonNull
+                            @Override
+                            public Transaction.Result doTransaction(MutableData mutableData) {
+                                Long currentValue = mutableData.getValue(Long.class);
+                                if (currentValue == null) {
+                                    mutableData.setValue(1);
+                                } else {
+                                    mutableData.setValue(currentValue - 1);
+                                }
+                                return Transaction.success(mutableData);
+                            }
+
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+
+                            }
+                        });
+                    }
+
+                    private void updateQR() {
+                        DatabaseReference sourceRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(spotId);
+                        DatabaseReference destinationRef = FirebaseDatabase.getInstance().getReference().child("qr").child("parked").child(spotId);
+
+                        // Read data from the source location
+                        sourceRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // Save the data locally
+                                Object data = dataSnapshot.getValue();
+
+                                // Delete the data from the source location
+                                sourceRef.removeValue()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                // Write the data to the new location
+                                                destinationRef.setValue(data)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                // Data moved successfully
+                                                                Log.d("FirebaseData", "Data moved successfully");
+                                                            }
+                                                        })
+                                                        .addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                // Failed to move data to the new location
+                                                                Log.e("FirebaseData", "Failed to move data: " + e.getMessage());
+                                                            }
+                                                        });
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                // Failed to delete data from the source location
+                                                Log.e("FirebaseData", "Failed to delete data: " + e.getMessage());
+                                            }
+                                        });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                                // Failed to read value
+                                Log.w("FirebaseData", "Failed to read value.", error.toException());
+                            }
+                        });
+                    }
+
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {

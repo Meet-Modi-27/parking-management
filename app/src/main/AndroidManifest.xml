@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Parking_Management"
         tools:targetApi="31">
         <activity
+            android:name=".Exit"
+            android:exported="false" />
+        <activity
             android:name=".qr_generate"
             android:exported="false" />
         <activity
