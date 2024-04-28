@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".qr_code"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:gravity="center">
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Generate a QR Code"
+      android:textSize="30sp"
+      android:textColor="#000"
+      android:textAlignment="center"
+      android:fontFamily="@font/bungee"/>
+
+  <com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Location Type"
+      android:textColorHint="#000"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp">
+
+    <AutoCompleteTextView
+        android:id="@+id/loc_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"/>
+
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:hint="Spot Type"
+      android:textColorHint="#000"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp">
+
+    <AutoCompleteTextView
+        android:id="@+id/vehicle_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"/>
+
+
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <androidx.appcompat.widget.AppCompatButton
+      android:id="@+id/Generate"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="Generate"
+      android:textColor="#fff"
+      android:background="#000"
+      android:layout_marginTop="10dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginEnd="20dp"/>
+
+  <ImageView
+      android:id="@+id/qr_code"
+      android:layout_width="200dp"
+      android:layout_height="200dp"/>
+
+  </LinearLayout>

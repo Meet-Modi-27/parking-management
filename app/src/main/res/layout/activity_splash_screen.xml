@@ -4,31 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".splash_screen"
     android:background="#FFBF00"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    tools:context=".splash_screen">
 
     <ImageView
         android:id="@+id/Logo"
-        android:transitionName="Parking_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/parking_logo"
         android:layout_marginBottom="20dp"
-        />
+        android:src="@drawable/parking_logo"
+        android:transitionName="Parking_logo" />
 
     <TextView
         android:id="@+id/title"
-        android:transitionName="Parking_text"
-        android:padding="20dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bangers"
-        android:text="Parking Management"
-        android:textSize="70sp"
+        android:padding="20dp"
+        android:text="PARK \n ME "
         android:textAlignment="center"
-        android:textColor="#000000"/>
+        android:textColor="#000000"
+        android:textSize="70sp"
+        android:transitionName="Parking_text" />
 
     <TextView
         android:id="@+id/Slogan"
@@ -38,6 +37,6 @@
         android:text="One &amp; Only Parking Solution"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="28sp"/>
+        android:textSize="28sp" />
 
 </LinearLayout>

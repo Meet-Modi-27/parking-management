@@ -1,16 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Parking_Management" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Parking_Management" parent="Theme.Material3.DynamicColors.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowIsTranslucent">true</item>1
 
     </style>
 
-    <style name="Theme.Parking_Management" parent="Base.Theme.Parking_Management" >
+    <style name="Theme.Parking_Management" parent="Theme.AppCompat.Light" >
 
         <item name="android:windowIsTranslucent">true</item>
-
 
     </style>
 
@@ -20,6 +19,5 @@
         <!-- Set button text color -->
         <item name="android:textColor">#FFFFFF</item>
     </style>
-
 
 </resources>

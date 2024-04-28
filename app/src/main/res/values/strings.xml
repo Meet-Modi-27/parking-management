@@ -14,4 +14,11 @@
         litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
         diam, vel rutrum tellus vulputate quis.
     </string>
+    <string name="full_name">Full Name</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="already_have_an_account_login">Already Have an Account? Login</string>
+    <string name="sign_up_to_start_your_journey">Sign Up to Start Your Journey</string>
 </resources>

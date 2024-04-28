@@ -1,17 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#fff"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:gravity="center"
+        android:background="#FFBF00">
+
+        <ImageView
+            android:layout_marginStart="5dp"
+            android:id="@+id/logo"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:src="@drawable/parking_logo"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/bangers"
+            android:text="Park Me "
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="40sp"/>
+
+        <ImageView
+            android:layout_marginEnd="5dp"
+            android:id="@+id/user_logo"
+            android:layout_width="45dp"
+            android:layout_height="55dp"
+            android:src="@drawable/user_name"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hello,"
+                android:textSize="45sp"
+                android:textColor="#000"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/bangers"
+                android:padding="0dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dashboard_name_rv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/bangers"
+                android:text="Book A slot"
+                android:textColor="#000"
+                android:textSize="35sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:gravity="center">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardCornerRadius="15dp"
+                        android:elevation="12dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_row="0"
+                        android:layout_margin="10dp"
+                        android:id="@+id/dashboard_scan_qr">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="#F4D03F"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/qr_code_scan_icon"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Scan To Book"
+                                android:textAlignment="center"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="#000"
+                                android:layout_marginTop="10dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardCornerRadius="15dp"
+                        android:elevation="12dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="1"
+                        android:layout_row="0"
+                        android:layout_margin="10dp"
+                        android:id="@+id/history">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="#F4D03F"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/ticket_icon"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Report"
+                                android:textAlignment="center"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="#000"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardCornerRadius="15dp"
+                        android:elevation="12dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_row="1"
+                        android:layout_margin="10dp"
+                        android:id="@+id/dashboard_checkBalance">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="#F4D03F"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/parking_svgrepo_com"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Available Slots"
+                                android:textAlignment="center"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="#000"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        app:cardCornerRadius="15dp"
+                        android:elevation="12dp"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="1"
+                        android:layout_row="1"
+                        android:layout_margin="10dp"
+                        android:id="@+id/dashboard_Find">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="#F4D03F"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/location_arrow_svgrepo_com"
+                                android:layout_gravity="center"/>
+                            <TextView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Find the Location"
+                                android:textAlignment="center"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="#000"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </GridLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

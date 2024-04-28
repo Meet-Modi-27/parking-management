@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".admin_Check"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the password"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:fontFamily="@font/bangers"
+        android:textSize="40sp"
+        android:layout_margin="10dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter the Password"
+        android:transitionName="field2"
+        app:passwordToggleDrawable="@drawable/custom_password_toggle"
+        app:passwordToggleEnabled="true"
+        android:layout_margin="20dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/admin_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go"
+        android:textColor="#fff"
+        android:background="#000"
+        android:layout_margin="20dp"
+        android:id="@+id/admin_btn"/>
+
+</LinearLayout>

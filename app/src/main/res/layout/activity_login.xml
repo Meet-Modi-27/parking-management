@@ -25,13 +25,14 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/bungee"
         android:text="Hello there, welcome back"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:layout_marginTop="10dp"/>
     <TextView
         android:id="@+id/welcome_st"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign In To continue"
+        android:transitionName="subtext"
         android:textSize="22sp"
         android:textColor="#000"
         android:fontFamily="@font/antic"/>
@@ -45,27 +46,32 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:id="@+id/email1"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
-            android:hint="Username"
+            android:transitionName="field1"
+            android:hint="Email"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="#000"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password"
+            android:id="@+id/password1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:transitionName="field2"
             android:hint="Password"
             app:passwordToggleEnabled="true"
             app:passwordToggleDrawable="@drawable/custom_password_toggle"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:inputType="textPassword"
                 android:layout_height="wrap_content" />
@@ -85,24 +91,35 @@
             android:layout_margin="5dp"/>
         
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/CustomButtonStyle"
+            android:transitionName="button1"
             android:text="GO"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"/>
 
         <Button
+            android:id="@+id/new_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_margin="5dp"
             android:background="#00000000"
             android:elevation="0dp"
+            android:transitionName="button2"
             android:text="New User? SIGN UP"
             android:textColor="#000000"
             android:textStyle="bold" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
 
 </LinearLayout>

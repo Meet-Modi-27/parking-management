@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".update_Profile"
+    android:background="#fff"
     android:orientation="vertical"
-    android:padding="10dp"
-    tools:context=".registration"
-    android:background="#fff">
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/car_logo"
@@ -22,20 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/bungee"
-        android:text="Welcome"
+        android:text="Update Profile"
         android:textColor="#000"
         android:textSize="35sp"
         android:transitionName="Parking_text" />
-
-    <TextView
-        android:id="@+id/welcome_st"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/antic"
-        android:text="@string/sign_up_to_start_your_journey"
-        android:textColor="#000"
-        android:textSize="22sp"
-        android:transitionName="subtext" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +41,7 @@
             android:hint="@string/full_name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_name"
+                android:id="@+id/update_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -65,7 +55,7 @@
             android:hint="@string/username">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_username"
+                android:id="@+id/update_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -75,75 +65,39 @@
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="@string/phone_number">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_phone"
+                android:id="@+id/update_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:transitionName="field2"
-            app:passwordToggleDrawable="@drawable/custom_password_toggle"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/reg_next"
+        android:id="@+id/update_profile"
         style="@style/CustomButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="continue"
+        android:text="update"
         android:transitionName="button1" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/new_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="5dp"
-        android:background="#00000000"
-        android:elevation="0dp"
-        android:text="@string/already_have_an_account_login"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:transitionName="button2"/>
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="invisible"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dummy"
+        android:visibility="invisible"
+        android:textSize="0dp"/>
 </LinearLayout>

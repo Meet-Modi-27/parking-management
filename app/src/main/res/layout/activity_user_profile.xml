@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".User_Profile"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User Details"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:fontFamily="@font/bangers"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/userProfile_rv"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Details"
+        android:textColor="#fff"
+        android:background="#000"
+        android:layout_margin="20dp"
+        android:id="@+id/details"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vehcile Details"
+        android:textColor="#fff"
+        android:background="#000"
+        android:layout_margin="20dp"
+        android:id="@+id/vehicle_details"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Booked Slot"
+        android:textColor="#fff"
+        android:background="#000"
+        android:layout_margin="20dp"
+        android:id="@+id/history"/>
+
+    <TextView
+        android:id="@+id/admin_access"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If Admin Click Here"
+        android:textColor="#FF0000"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/antic"/>
+
+</LinearLayout>

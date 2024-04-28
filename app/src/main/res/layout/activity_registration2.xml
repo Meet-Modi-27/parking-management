@@ -11,10 +11,10 @@
 
     <ImageView
         android:id="@+id/car_logo"
-        android:layout_width="150dp"
-        android:layout_height="130dp"
-        android:src="@drawable/parking_car_1643"
-        android:transitionName="Parking_logo" />
+        android:layout_margin="5dp"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:src="@drawable/parking_car_1643"/>
 
     <TextView
         android:id="@+id/welcome"
@@ -22,20 +22,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/bungee"
-        android:text="Welcome"
+        android:text="Vehicle Details"
         android:textColor="#000"
-        android:textSize="35sp"
-        android:transitionName="Parking_text" />
+        android:textSize="35sp"/>
 
     <TextView
         android:id="@+id/welcome_st"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/antic"
-        android:text="@string/sign_up_to_start_your_journey"
+        android:text="Final Step Before Joining Us"
         android:textColor="#000"
-        android:textSize="22sp"
-        android:transitionName="subtext" />
+        android:textSize="22sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,24 +46,11 @@
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/full_name">
+            android:hint="Make"
+            android:textColorHint="#000">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:transitionName="field1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_username"
+                android:id="@+id/vehicle_make"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text" />
@@ -75,45 +60,48 @@
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email">
+            android:hint="Model"
+            android:textColorHint="#000">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_email"
+                android:id="@+id/vehicle_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/vehicle_number_layout"
             style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/phone_number">
+            android:hint="Plate Number"
+            android:textColorHint="#000">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_phone"
+                android:id="@+id/vehicle_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
-
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
-
+        
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:transitionName="field2"
-            app:passwordToggleDrawable="@drawable/custom_password_toggle"
-            app:passwordToggleEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/reg_password"
+            android:hint="Vehicle Type"
+            android:textColorHint="#000">
+            
+            <AutoCompleteTextView
+                android:id="@+id/vehicle_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="none"/>
+
 
         </com.google.android.material.textfield.TextInputLayout>
+
+
 
 
     </LinearLayout>
@@ -125,25 +113,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="continue"
-        android:transitionName="button1" />
+        android:text="Register"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/new_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="5dp"
-        android:background="#00000000"
-        android:elevation="0dp"
-        android:text="@string/already_have_an_account_login"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:transitionName="button2"/>
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="invisible"/>
+
 </LinearLayout>

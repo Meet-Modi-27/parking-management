@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="16dp"
+    android:elevation="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FAF9F6"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Make: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/vehicle_make"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Model: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/vehicle_model"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number Plate: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/vehicle_numberplate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="22sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/vehicle_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
