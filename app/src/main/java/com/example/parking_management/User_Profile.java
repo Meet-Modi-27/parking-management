@@ -17,6 +17,7 @@ import com.example.parking_management.database.nfDatabase;
 import com.example.parking_management.database.userDatabase;
 import com.example.parking_management.models.usersModel;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -29,8 +30,9 @@ public class User_Profile extends AppCompatActivity {
     String userId;
     Button update;
     Button vehicle;
-    Button history;
+    Button history,signout;
     TextView admin;
+    FirebaseAuth mAuth;
 
     nfDatabase nf;
 
@@ -42,6 +44,7 @@ public class User_Profile extends AppCompatActivity {
         userId=getIntent().getStringExtra("userId");
         rv = findViewById(R.id.userProfile_rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        mAuth = FirebaseAuth.getInstance();
 
         nf = new nfDatabase(this);
 
@@ -93,6 +96,18 @@ public class User_Profile extends AppCompatActivity {
                 Intent intent = new Intent(User_Profile.this, admin_Check.class);
                 intent.putExtra("userId",userId);
                 startActivity(intent);
+            }
+        });
+
+        signout=findViewById(R.id.logout_btn);
+        signout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(User_Profile.this, login.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             }
         });
 

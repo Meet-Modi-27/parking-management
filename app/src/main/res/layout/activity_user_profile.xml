@@ -51,6 +51,15 @@
         android:layout_margin="20dp"
         android:id="@+id/history"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:textColor="#fff"
+        android:background="#000"
+        android:layout_margin="20dp"
+        android:id="@+id/logout_btn"/>
+
     <TextView
         android:id="@+id/admin_access"
         android:layout_width="match_parent"

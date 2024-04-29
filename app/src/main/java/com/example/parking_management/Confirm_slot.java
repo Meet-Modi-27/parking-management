@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class Confirm_slot extends AppCompatActivity {
 
@@ -164,38 +165,45 @@ public class Confirm_slot extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 // Save the data locally
-                                Object data = dataSnapshot.getValue();
+                                Map<String, Object> data = (Map<String, Object>) dataSnapshot.getValue();
 
-                                // Delete the data from the source location
-                                sourceRef.removeValue()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                // Write the data to the new location
-                                                destinationRef.setValue(data)
-                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void aVoid) {
-                                                                // Data moved successfully
-                                                                Log.d("FirebaseData", "Data moved successfully");
-                                                            }
-                                                        })
-                                                        .addOnFailureListener(new OnFailureListener() {
-                                                            @Override
-                                                            public void onFailure(@NonNull Exception e) {
-                                                                // Failed to move data to the new location
-                                                                Log.e("FirebaseData", "Failed to move data: " + e.getMessage());
-                                                            }
-                                                        });
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                // Failed to delete data from the source location
-                                                Log.e("FirebaseData", "Failed to delete data: " + e.getMessage());
-                                            }
-                                        });
+                                if (data != null) {
+                                    // Update userId in the data map
+                                    data.put("userId", userId);
+
+                                    // Delete the data from the source location
+                                    sourceRef.removeValue()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    // Write the updated data to the new location
+                                                    destinationRef.setValue(data)
+                                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void aVoid) {
+                                                                    // Data moved successfully with userId updated
+                                                                    Log.d("FirebaseData", "Data moved and userId updated successfully");
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    // Failed to move data to the new location
+                                                                    Log.e("FirebaseData", "Failed to move data: " + e.getMessage());
+                                                                }
+                                                            });
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    // Failed to delete data from the source location
+                                                    Log.e("FirebaseData", "Failed to delete data: " + e.getMessage());
+                                                }
+                                            });
+                                } else {
+                                    Log.e("FirebaseData", "Data snapshot is null or not a map");
+                                }
                             }
 
                             @Override
@@ -205,6 +213,7 @@ public class Confirm_slot extends AppCompatActivity {
                             }
                         });
                     }
+
 
 
                     @Override

@@ -1,5 +1,6 @@
 package com.example.parking_management;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,8 +15,11 @@ import com.example.parking_management.models.usersModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class update_Profile extends AppCompatActivity {
 
@@ -45,6 +49,16 @@ public class update_Profile extends AppCompatActivity {
         db = FirebaseDatabase.getInstance().getReference().child("users");
         update = findViewById(R.id.update_profile);
 
+        if (mUser != null) {
+            userId = mUser.getUid();
+        } else {
+            // Handle the case where the user is not authenticated
+            Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show();
+            finish(); // Close the activity
+        }
+
+        fetchData();
+
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,28 +67,65 @@ public class update_Profile extends AppCompatActivity {
         });
     }
 
+    private void fetchData() {
+        DatabaseReference dbRef = db.child("Reg_Users").child(userId);
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    usersModel um = snapshot.getValue(usersModel.class);
+
+                    if (um != null) {
+                        name.setText(um.getName());
+                        username.setText(um.getUsername());
+                        phone.setText(um.getNumber());
+                    } else {
+                        Toast.makeText(update_Profile.this, "User data not found", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(update_Profile.this, "Data Not found", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle database error
+                Toast.makeText(update_Profile.this, "Database error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void performUpdate() {
-        String Name = name.getText().toString();
-        String Username = username.getText().toString();
-        String Phone = phone.getText().toString();
+        String Name = name.getText().toString().trim();
+        String Username = username.getText().toString().trim();
+        String Phone = phone.getText().toString().trim();
 
         if (Name.isEmpty()) {
-            name.setError("Enter the Name.");
-        } else if (Username.isEmpty()) {
-            username.setError("Enter the username.");
-        } else if (Phone.isEmpty()) {
-            phone.setError("Enter the Phone Number");
-        } else if (Phone.length() < 10 || Phone.length() > 13) {
-            phone.setError("Enter Correct Phone Number");
-        } else {
-            progressBar.setVisibility(View.VISIBLE);
-            userId = mAuth.getCurrentUser().getUid();
-            fetchAndSetEmail();
-            UpdateDataToFirebase(Name, Username, Phone);
-            progressBar.setVisibility(View.INVISIBLE);
-            SendUserToNextActivity();
-            Toast.makeText(update_Profile.this, "Update Complete", Toast.LENGTH_SHORT).show();
+            name.setError("Enter the Name");
+            return;
         }
+        if (Username.isEmpty()) {
+            username.setError("Enter the Username");
+            return;
+        }
+        if (Phone.isEmpty()) {
+            phone.setError("Enter the Phone Number");
+            return;
+        }
+        if (Phone.length() < 10 || Phone.length() > 13) {
+            phone.setError("Enter Correct Phone Number");
+            return;
+        }
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        fetchAndSetEmail();
+        UpdateDataToFirebase(Name, Username, Phone);
+
+        progressBar.setVisibility(View.INVISIBLE);
+        SendUserToNextActivity();
+        Toast.makeText(update_Profile.this, "Update Complete", Toast.LENGTH_SHORT).show();
     }
 
     private void fetchAndSetEmail() {
@@ -91,7 +142,7 @@ public class update_Profile extends AppCompatActivity {
     private void SendUserToNextActivity() {
         Intent intent = new Intent(update_Profile.this, User_Profile.class);
         intent.putExtra("userId", userId);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 }

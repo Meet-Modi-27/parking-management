@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,10 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import java.util.Map;
 
 public class Exit extends AppCompatActivity {
 
-    private String spotId, loc;
+    private String spotId, loc,userId;
     private DatabaseReference counterRef;
 
     @Override
@@ -29,6 +31,7 @@ public class Exit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         spotId = getIntent().getStringExtra("spotId");
+        userId = getIntent().getStringExtra("userId");
 
         if (spotId != null && spotId.contains("_")) {
             int index = spotId.indexOf('_');
@@ -38,8 +41,6 @@ public class Exit extends AppCompatActivity {
         }
 
         counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child("Temp_Counter").child(loc);
-
-        updateCounter();
         updateQR();
         finish();
 
@@ -73,46 +74,40 @@ public class Exit extends AppCompatActivity {
         sourceRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Save the data locally
-                Object data = dataSnapshot.getValue();
+                // Check if data exists and retrieve the user ID
+                if (dataSnapshot.exists()) {
+                    String parkedUserId = dataSnapshot.child("userId").getValue(String.class);
+                    if (parkedUserId != null && parkedUserId.equals(userId)) {
+                        // Create a new data object from the snapshot, removing or nullifying the user ID
+                        Map<String, Object> dataMap = (Map<String, Object>) dataSnapshot.getValue();
+                        dataMap.put("userId", ""); // Set userId to an empty string or you could also use null
 
-                // Delete the data from the source location
-                sourceRef.removeValue()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                // Write the data to the new location
-                                destinationRef.setValue(data)
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                // Data moved successfully
-                                                Log.d("FirebaseData", "Data moved successfully");
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                // Failed to move data to the new location
-                                                Log.e("FirebaseData", "Failed to move data: " + e.getMessage());
-                                            }
-                                        });
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Failed to delete data from the source location
-                                Log.e("FirebaseData", "Failed to delete data: " + e.getMessage());
-                            }
-                        });
+                        // Delete the data from the source location
+                        sourceRef.removeValue()
+                                .addOnSuccessListener(aVoid -> {
+                                    // Set the modified data to the new location
+                                    destinationRef.setValue(dataMap)
+                                            .addOnSuccessListener(aVoid1 -> {
+                                                Log.d("FirebaseData", "Data moved and user ID cleared successfully");
+                                                updateCounter();
+                                            })
+                                            .addOnFailureListener(e -> Log.e("FirebaseData", "Failed to move data: " + e.getMessage()));
+                                })
+                                .addOnFailureListener(e -> Log.e("FirebaseData", "Failed to delete data: " + e.getMessage()));
+                    } else {
+                        Toast.makeText(Exit.this, "Log In with the same Id to scan exit code.", Toast.LENGTH_SHORT).show();
+                        Log.d("FirebaseData", "User ID does not match. No data moved.");
+                    }
+                } else {
+                    Log.d("FirebaseData", "No data found at source reference.");
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Failed to read value
                 Log.w("FirebaseData", "Failed to read value.", error.toException());
             }
         });
     }
+
 }

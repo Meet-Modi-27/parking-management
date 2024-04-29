@@ -186,7 +186,6 @@ public class login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() != null){
-            Log.d("User",mAuth.getCurrentUser().getUid());
             SendUserToNextActivity(mAuth.getCurrentUser().getUid());
         }
     }
