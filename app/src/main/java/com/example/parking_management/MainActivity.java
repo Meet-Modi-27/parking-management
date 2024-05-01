@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,26 +30,25 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rv;
     dashboard_adapter adapter;
     DatabaseReference usersRef;
-    CardView scan_qr,exit;
-    CardView find;
-    String results;
-    String userId;
+    CardView scan_qr, exit, find, avail_slots;
     ImageView profile;
-    String currentPrompt;
+    String results, userId, currentPrompt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userId=getIntent().getStringExtra("userId");
+        if (savedInstanceState != null) {
+            currentPrompt = savedInstanceState.getString("CurrentPrompt");
+        }
+
+        userId = getIntent().getStringExtra("userId");
         rv = findViewById(R.id.dashboard_name_rv);
-        rv.setLayoutManager(new LinearLayoutManager(this)); // Don't forget to set a LayoutManager
-
-
+        rv.setLayoutManager(new LinearLayoutManager(this));
         usersRef = FirebaseDatabase.getInstance().getReference().child("users");
 
-         Query query = usersRef.child("Reg_Users").orderByChild("userId").equalTo(userId);
+        Query query = usersRef.child("Reg_Users").orderByChild("userId").equalTo(userId);
         FirebaseRecyclerOptions<usersModel> options =
                 new FirebaseRecyclerOptions.Builder<usersModel>()
                         .setQuery(query, usersModel.class)
@@ -59,50 +57,38 @@ public class MainActivity extends AppCompatActivity {
         adapter = new dashboard_adapter(options);
         rv.setAdapter(adapter);
 
+        initViews();
+    }
 
+    private void initViews() {
         scan_qr = findViewById(R.id.dashboard_scan_qr);
-        scan_qr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentPrompt = "Scan for Entry";
-                Log.d("Prompt",currentPrompt);
-                startQRScan("Scan for Entry");
-            }
-        });
+        scan_qr.setOnClickListener(v -> startQRScan("Scan for Entry"));
 
         exit = findViewById(R.id.exit);
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentPrompt = "Scan for Exit";
-                startQRScan("Scan for Exit");
-            }
+        exit.setOnClickListener(v -> startQRScan("Scan for Exit"));
+
+        avail_slots = findViewById(R.id.dashboard_available_Slots);
+        avail_slots.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Available_slots.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
         });
 
         profile = findViewById(R.id.user_logo);
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,User_Profile.class);
-                intent.putExtra("userId",userId);
-                startActivity(intent);
-            }
+        profile.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, User_Profile.class);
+            intent.putExtra("userId", userId);
+            startActivity(intent);
         });
 
         find = findViewById(R.id.dashboard_Find);
-        find.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,Find_Location.class);
-                startActivity(intent);
-            }
-        });
+        find.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, Find_Location.class)));
     }
 
     private void startQRScan(String prompt) {
         currentPrompt = prompt;
-        Log.d("startScan Prompt",currentPrompt);
-        IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
+        Log.d("startScan Prompt", currentPrompt);
+        IntentIntegrator intentIntegrator = new IntentIntegrator(this);
         intentIntegrator.setOrientationLocked(true);
         intentIntegrator.setPrompt(prompt);
         intentIntegrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
@@ -111,12 +97,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (intentResult != null) {
-            String contents = intentResult.getContents();
-            if (contents != null) {
-                results = intentResult.getContents();
-                DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(results);
+        if (intentResult != null && intentResult.getContents() != null) {
+            results = intentResult.getContents();
+            String[] parts = results.split("_");
+            if (parts.length > 0) {
+                String loc = parts[0];
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(loc).child(results);
                 db.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -133,41 +121,39 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Database Error", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     private void handleEntryScanResult(String result) {
-        Intent intent = new Intent(MainActivity.this, Confirm_slot.class);
+        Intent intent = new Intent(this, Confirm_slot.class);
         intent.putExtra("userId", userId);
         intent.putExtra("spotId", result);
         startActivity(intent);
     }
 
     private void handleExitScanResult(String result) {
-        Intent intent = new Intent(MainActivity.this, Exit.class);
+        Intent intent = new Intent(this, Exit.class);
         intent.putExtra("userId", userId);
         intent.putExtra("spotId", result);
         startActivity(intent);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("CurrentPrompt", currentPrompt);
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if (adapter != null) {
-            adapter.startListening();
-        }
+        adapter.startListening();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (adapter != null) {
-            adapter.stopListening();
-        }
+        adapter.stopListening();
     }
 }

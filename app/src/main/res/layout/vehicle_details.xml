@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
     app:cardCornerRadius="16dp"
-    android:elevation="8dp">
+    android:elevation="8dp"
+    android:background="#FAF9F6">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,9 +17,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="#FAF9F6">
 
             <TextView
+                android:background="#FAF9F6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Make: "
@@ -28,6 +31,7 @@
                 android:layout_margin="10dp"
                 android:textStyle="bold"/>
             <TextView
+                android:background="#FAF9F6"
                 android:id="@+id/vehicle_make"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,11 +43,13 @@
 
         </LinearLayout>
         <LinearLayout
+            android:background="#FAF9F6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
+                android:background="#FAF9F6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Model: "
@@ -53,6 +59,7 @@
                 android:layout_margin="10dp"
                 android:textStyle="bold"/>
             <TextView
+                android:background="#FAF9F6"
                 android:id="@+id/vehicle_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,11 +71,13 @@
 
         </LinearLayout>
         <LinearLayout
+            android:background="#FAF9F6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
+                android:background="#FAF9F6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Number Plate: "
@@ -78,6 +87,7 @@
                 android:layout_margin="10dp"
                 android:textStyle="bold"/>
             <TextView
+                android:background="#FAF9F6"
                 android:id="@+id/vehicle_numberplate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,11 +99,13 @@
 
         </LinearLayout>
         <LinearLayout
+            android:background="#FAF9F6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
+                android:background="#FAF9F6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Type: "
@@ -103,6 +115,7 @@
                 android:layout_margin="10dp"
                 android:textStyle="bold"/>
             <TextView
+                android:background="#FAF9F6"
                 android:id="@+id/vehicle_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

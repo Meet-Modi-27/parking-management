@@ -7,7 +7,7 @@
 
     </style>
 
-    <style name="Theme.Parking_Management" parent="Theme.AppCompat.Light" >
+    <style name="Theme.Parking_Management" parent="Theme.AppCompat.Light">
 
         <item name="android:windowIsTranslucent">true</item>
 

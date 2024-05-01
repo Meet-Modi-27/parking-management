@@ -147,7 +147,7 @@ public class qr_code extends AppCompatActivity {
                         String newKey = loc1 + "_" + counterValue;
 
                         // Get a reference to the 'qr' node using the location
-                        DatabaseReference qrRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty");
+                        DatabaseReference qrRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(dropDownItem);
 
                         // Create a new spotModel instance with the updated key
                         spotModel SpotModel = new spotModel(loc1, vehicle1, newKey,"");

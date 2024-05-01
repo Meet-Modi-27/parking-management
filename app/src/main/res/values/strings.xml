@@ -21,4 +21,5 @@
     <string name="password">Password</string>
     <string name="already_have_an_account_login">Already Have an Account? Login</string>
     <string name="sign_up_to_start_your_journey">Sign Up to Start Your Journey</string>
+    <string name="title_activity_available_slots">Available_slots</string>
 </resources>

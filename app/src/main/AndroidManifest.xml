@@ -15,6 +15,11 @@
         android:theme="@style/Theme.Parking_Management"
         tools:targetApi="31">
         <activity
+            android:name=".Available_slots"
+            android:exported="false"
+            android:label="@string/title_activity_available_slots"
+            android:theme="@style/Theme.Parking_Management" />
+        <activity
             android:name=".Exit"
             android:exported="false" />
         <activity

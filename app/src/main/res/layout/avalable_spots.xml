@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FAF9F6"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="16dp"
+    android:elevation="8dp">
+
+    <TextView
+        android:id="@+id/spot_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Spot Location"
+        android:textColor="#000"
+        android:textSize="25sp"
+        android:padding="10dp"
+        android:fontFamily="@font/antic"/>
+
+</androidx.cardview.widget.CardView>

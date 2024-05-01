@@ -68,8 +68,10 @@ public class Exit extends AppCompatActivity {
     }
 
     private void updateQR() {
-        DatabaseReference destinationRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(spotId);
-        DatabaseReference sourceRef = FirebaseDatabase.getInstance().getReference().child("qr").child("parked").child(spotId);
+        String[] parts = spotId.split("_");
+        String Loc = parts[0];
+        DatabaseReference destinationRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(Loc).child(spotId);
+        DatabaseReference sourceRef = FirebaseDatabase.getInstance().getReference().child("qr").child("parked").child(Loc).child(spotId);
 
         sourceRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

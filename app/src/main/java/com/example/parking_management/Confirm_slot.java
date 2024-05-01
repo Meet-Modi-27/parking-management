@@ -56,10 +56,11 @@ public class Confirm_slot extends AppCompatActivity {
             loc = spotId;  // Handle appropriately if no underscore is present
         }
 
+
         userRef = FirebaseDatabase.getInstance().getReference().child("users").child("Reg_Users").child(userId);
         dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("bookings").child(userId);
         vehicleRef = FirebaseDatabase.getInstance().getReference().child("users").child("Reg_vehicles").child(userId);
-        spotRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(spotId);
+        spotRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(loc).child(spotId);
         counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child("Temp_Counter").child(loc);
 
         spotRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -157,8 +158,11 @@ public class Confirm_slot extends AppCompatActivity {
                     }
 
                     private void updateQR() {
-                        DatabaseReference sourceRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(spotId);
-                        DatabaseReference destinationRef = FirebaseDatabase.getInstance().getReference().child("qr").child("parked").child(spotId);
+                        String[] parts = spotId.split("_");
+                        String Loc = parts[0];
+
+                        DatabaseReference sourceRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(Loc).child(spotId);
+                        DatabaseReference destinationRef = FirebaseDatabase.getInstance().getReference().child("qr").child("parked").child(Loc).child(spotId);
 
                         // Read data from the source location
                         sourceRef.addListenerForSingleValueEvent(new ValueEventListener() {
