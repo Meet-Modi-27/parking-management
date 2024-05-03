@@ -8,6 +8,25 @@
     android:orientation="vertical"
     android:background="#fff">
 
+
+    <TextView
+        android:id="@+id/currentBooking_Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Currnetly booked slots"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:fontFamily="@font/bangers"
+        android:textSize="0sp"
+        android:visibility="invisible"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/currentBooking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="invisible"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,6 +37,7 @@
         android:textSize="40sp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/previousBookings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"/>

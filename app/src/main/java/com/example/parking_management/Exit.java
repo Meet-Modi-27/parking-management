@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 import java.util.Map;
 
 public class Exit extends AppCompatActivity {
@@ -42,6 +44,7 @@ public class Exit extends AppCompatActivity {
 
         counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child("Temp_Counter").child(loc);
         updateQR();
+        updateBookings();
         finish();
 
     }
@@ -112,4 +115,39 @@ public class Exit extends AppCompatActivity {
         });
     }
 
+    private void updateBookings() {
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference sourceRef = rootRef.child("users").child("bookings").child("Current").child(userId);
+
+        sourceRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Generate a unique key using a timestamp
+                    String uniqueKey = Long.toString(System.currentTimeMillis());
+
+                    // Assuming dataSnapshot is the node containing all current booking details for a user
+                    for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                        Map<String, Object> dataMap = (Map<String, Object>) childSnapshot.getValue();
+
+                        // Path to store directly under the timestamp, without an extra key
+                        Map<String, Object> updatePaths = new HashMap<>();
+                        updatePaths.put("users/bookings/Previous/" + userId + "/" + uniqueKey, dataMap);
+                        updatePaths.put("users/bookings/Current/" + userId, null); // This will delete the data
+
+                        rootRef.updateChildren(updatePaths)
+                                .addOnSuccessListener(aVoid -> Log.d("FirebaseData", "Data moved successfully"))
+                                .addOnFailureListener(e -> Log.e("FirebaseData", "Failed to move data: " + e.getMessage()));
+                    }
+                } else {
+                    Log.d("FirebaseData", "No data found at source reference.");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w("FirebaseData", "Failed to read value.", error.toException());
+            }
+        });
+    }
 }

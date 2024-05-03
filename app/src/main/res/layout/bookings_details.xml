@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="16dp"
+    android:elevation="8dp"
+    android:background="#FAF9F6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FAF9F6"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FAF9F6">
+
+            <TextView
+                android:background="#FAF9F6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UserName: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:background="#FAF9F6"
+                android:id="@+id/bookings_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="22sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:background="#FAF9F6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:background="#FAF9F6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number Plate: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:background="#FAF9F6"
+                android:id="@+id/bookings_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="20sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:background="#FAF9F6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:background="#FAF9F6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spot: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:background="#FAF9F6"
+                android:id="@+id/bookings_spot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="22sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:background="#FAF9F6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:background="#FAF9F6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time Stamp: "
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="25sp"
+                android:layout_margin="10dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:background="#FAF9F6"
+                android:id="@+id/bookings_timestamp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textColor="#000"
+                android:fontFamily="@font/antic"
+                android:textSize="20sp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

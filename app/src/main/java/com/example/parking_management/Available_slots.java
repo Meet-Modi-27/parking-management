@@ -83,21 +83,18 @@ public class Available_slots extends AppCompatActivity {
             count.setVisibility(View.INVISIBLE);
             detail.setVisibility(View.INVISIBLE);
         } else if (dropDownItem.equals("Location 1")) {
-            dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            dbRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                        Toast.makeText(Available_slots.this, "Finding Data", Toast.LENGTH_SHORT).show();
                         Long value = snapshot.child("Location 1").getValue(Long.class);
                         if (value != null) {
                             counting.setText(String.valueOf(value)); // Display as String
                         } else {
-                            counting.setText("Data not available");
-                            Toast.makeText(Available_slots.this, "No Data Available", Toast.LENGTH_SHORT).show();
+                            counting.setText("0");
                         }
                     } else {
                         counting.setText("Data not available");
-                        Toast.makeText(Available_slots.this, "No Data Available", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -107,9 +104,67 @@ public class Available_slots extends AppCompatActivity {
                     Toast.makeText(Available_slots.this, "Error retrieving data", Toast.LENGTH_SHORT).show();
                 }
             });
+
             runAdapter(dropDownItem);
             count.setVisibility(View.VISIBLE);
             detail.setVisibility(View.VISIBLE);
+        } else if (dropDownItem.equals("Location 2")) {
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        Toast.makeText(Available_slots.this, "Finding Data", Toast.LENGTH_SHORT).show();
+                        Long value = snapshot.child("Location 2").getValue(Long.class);
+                        if (value != null) {
+                            counting.setText(String.valueOf(value)); // Display as String
+                        } else {
+                            counting.setText("0");
+                        }
+                    } else {
+                        counting.setText("Data not available");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle error
+                    Toast.makeText(Available_slots.this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            runAdapter(dropDownItem);
+            count.setVisibility(View.VISIBLE);
+            detail.setVisibility(View.VISIBLE);
+        } else if (dropDownItem.equals("Location 3")) {
+            dbRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        Toast.makeText(Available_slots.this, "Finding Data", Toast.LENGTH_SHORT).show();
+                        Long value = snapshot.child("Location 3").getValue(Long.class);
+                        if (value != null) {
+                            counting.setText(String.valueOf(value)); // Display as String
+                        } else {
+                            counting.setText("0");
+                        }
+                    } else {
+                        counting.setText("Data not available");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle error
+                    Toast.makeText(Available_slots.this, "Error retrieving data", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            runAdapter(dropDownItem);
+            count.setVisibility(View.VISIBLE);
+            detail.setVisibility(View.VISIBLE);
+        }else{
+            count.setVisibility(View.INVISIBLE);
+            detail.setVisibility(View.INVISIBLE);
         }
     }
 

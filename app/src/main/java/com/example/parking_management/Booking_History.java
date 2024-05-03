@@ -1,18 +1,33 @@
 package com.example.parking_management;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.parking_management.adapters.bookings_adapters;
 import com.example.parking_management.database.SlotDatabase;
 import com.example.parking_management.database.nfDatabase;
 import com.example.parking_management.database.userDatabase;
+import com.example.parking_management.models.bookingsModel;
+import com.example.parking_management.models.usersModel;
 import com.example.parking_management.models.vehicleModel;
 import com.example.parking_management.models.confirmModel;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 public class Booking_History extends AppCompatActivity {
@@ -21,6 +36,9 @@ public class Booking_History extends AppCompatActivity {
     SlotDatabase slotDatabase;
     userDatabase userDatabase;
     nfDatabase nf;
+    TextView currentText;
+    RecyclerView rv_current,rv_previous;
+    bookings_adapters adapter,adapter1;
 
 
 
@@ -37,8 +55,61 @@ public class Booking_History extends AppCompatActivity {
         slotDatabase = new SlotDatabase(this);
         userDatabase = new userDatabase(this);
         nf = new nfDatabase(this);
+        currentText = findViewById(R.id.currentBooking_Text);
+        rv_current = findViewById(R.id.currentBooking); // Add this line to initialize rv_current
+        rv_previous = findViewById(R.id.previousBookings);
+        rv_previous.setLayoutManager(new LinearLayoutManager(this));
+        rv_current.setLayoutManager(new LinearLayoutManager(this));
 
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        Query query = db.child("users").child("bookings").child("Previous").child(userId);
 
+        FirebaseRecyclerOptions<bookingsModel> options =
+                new FirebaseRecyclerOptions.Builder<bookingsModel>()
+                        .setQuery(query, bookingsModel.class)
+                        .build();
+
+        adapter = new bookings_adapters(options);
+        rv_previous.setAdapter(adapter);
+
+        DatabaseReference counter;
+        counter = FirebaseDatabase.getInstance().getReference().child("counter").child("booking counter").child(userId);
+
+        counter.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Object data = snapshot.getValue();
+                if (data.equals(0)){
+                    currentText.setText("");
+                    currentText.setTextSize(0);
+                    currentText.setVisibility(View.INVISIBLE);
+                    rv_current.setVisibility(View.INVISIBLE);
+                } else {
+                    currentText.setText("Current Booked Slot");
+                    currentText.setTextSize(40);
+                    currentText.setVisibility(View.VISIBLE);
+                    rv_current.setVisibility(View.VISIBLE);
+
+                    DatabaseReference db1 = FirebaseDatabase.getInstance().getReference();
+                    Query query1 = db1.child("users").child("bookings").child("Current").child(userId);
+                    FirebaseRecyclerOptions<bookingsModel> options1 =
+                            new FirebaseRecyclerOptions.Builder<bookingsModel>()
+                                    .setQuery(query1, bookingsModel.class)
+                                    .build();
+                    adapter1 = new bookings_adapters(options1);
+                    rv_current.setAdapter(adapter1);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        createDatabase();
+
+    }
+    private void createDatabase() {
         slotDatabase.DeleteData();
         userDatabase.DeleteData();
         nf.DeleteData();
@@ -70,7 +141,6 @@ public class Booking_History extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        // Handle error
                         Log.e("FirebaseData", "Failed to read vehicle data.", databaseError.toException());
                     }
                 });
@@ -88,7 +158,6 @@ public class Booking_History extends AppCompatActivity {
                             String number = snapshot.child("number").getValue(String.class);
                             String UserId = snapshot.child("userId").getValue(String.class);
                             // Insert data into SQLite database
-                            Toast.makeText(Booking_History.this, "Creating", Toast.LENGTH_SHORT).show();
                             userDatabase.insertUserData(UserId, name, userName,email,number);
                         }
                     }
@@ -130,5 +199,27 @@ public class Booking_History extends AppCompatActivity {
                         Log.e("FirebaseData", "Failed to read vehicle data.", databaseError.toException());
                     }
                 });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (adapter != null) {
+            adapter.startListening();
+        }
+        if (adapter1 != null) {
+            adapter1.startListening();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (adapter != null) {
+            adapter.stopListening();
+        }
+        if (adapter1 != null) {
+            adapter1.stopListening();
+        }
     }
 }

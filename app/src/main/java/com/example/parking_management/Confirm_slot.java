@@ -58,7 +58,7 @@ public class Confirm_slot extends AppCompatActivity {
 
 
         userRef = FirebaseDatabase.getInstance().getReference().child("users").child("Reg_Users").child(userId);
-        dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("bookings").child(userId);
+        dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("bookings").child("Current").child(userId);
         vehicleRef = FirebaseDatabase.getInstance().getReference().child("users").child("Reg_vehicles").child(userId);
         spotRef = FirebaseDatabase.getInstance().getReference().child("qr").child("empty").child(loc).child(spotId);
         counterRef = FirebaseDatabase.getInstance().getReference().child("counter").child("Temp_Counter").child(loc);
