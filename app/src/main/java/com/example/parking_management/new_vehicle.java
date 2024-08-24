@@ -30,7 +30,7 @@ public class new_vehicle extends AppCompatActivity {
 
     ArrayAdapter<String> adapterItems;
 
-    TextInputEditText make,model,numberPlate;
+    TextInputEditText make, model, numberPlate;
     TextInputLayout number;
 
     String NumberPlatePattern = "[A-Z]{2}-[0-9]{2}-[A-Z]{2}-[0-9]{4}";
@@ -40,27 +40,26 @@ public class new_vehicle extends AppCompatActivity {
     FirebaseUser mUser;
     DatabaseReference db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_vehicle);
 
         add = findViewById(R.id.add_vehcile_btn);
-        make= findViewById(R.id.vehicle_make);
-        model= findViewById(R.id.vehicle_model);
-        numberPlate= findViewById(R.id.vehicle_number);
-        number= findViewById(R.id.vehicle_number_layout);
+        make = findViewById(R.id.vehicle_make);
+        model = findViewById(R.id.vehicle_model);
+        numberPlate = findViewById(R.id.vehicle_number);
+        number = findViewById(R.id.vehicle_number_layout);
 
         userId = getIntent().getStringExtra("userId");
 
         progressBar = findViewById(R.id.progress_bar);
-        mAuth= FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         db = FirebaseDatabase.getInstance().getReference().child("users");
 
         vehicle_type = findViewById(R.id.vehicle_type);
-        adapterItems = new ArrayAdapter<String>(this, R.layout.list_item, item);
+        adapterItems = new ArrayAdapter<>(this, R.layout.list_item, item);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,28 +76,28 @@ public class new_vehicle extends AppCompatActivity {
             }
         });
     }
+
     private void updateSelectedItem(String selectedItem) {
         dropDownItem = selectedItem;
-        if (dropDownItem!=null){
-        }
     }
+
     private void performRegistration() {
         String Make = make.getText().toString();
         String Model = model.getText().toString();
         String NumberPlate = numberPlate.getText().toString();
         String Selector = dropDownItem;
 
-        if (Make.isEmpty()){
+        if (Make.isEmpty()) {
             make.setError("Enter the Make.");
-        } else if(Model.isEmpty()){
+        } else if (Model.isEmpty()) {
             model.setError("Enter the Model.");
-        } else if (!NumberPlate.matches(NumberPlatePattern)){
+        } else if (!NumberPlate.matches(NumberPlatePattern)) {
             number.setError("Enter Correct Number Plate.\nFormat: XX-XX-XX-XXXX");
-        } else if (Selector.isEmpty()){
+        } else if (Selector == null || Selector.isEmpty()) {
             vehicle_type.setError("Select the vehicle Type");
         } else {
             progressBar.setVisibility(View.VISIBLE);
-            UpdateDataToFirebase(Make,Model,NumberPlate,Selector);
+            UpdateDataToFirebase(Make, Model, NumberPlate, Selector);
             progressBar.setVisibility(View.INVISIBLE);
             SendUserToNextActivity();
             Toast.makeText(new_vehicle.this, "Vehicle Data Added!!!", Toast.LENGTH_SHORT).show();
@@ -110,13 +109,12 @@ public class new_vehicle extends AppCompatActivity {
         String vehicleId = userRef.push().getKey();
         vehicleModel vehicleModel = new vehicleModel(MAKE, MODEL, NUMBERPLATE, SELECTOR, userId);
         userRef.child(vehicleId).setValue(vehicleModel);
-
     }
 
     private void SendUserToNextActivity() {
         Intent intent = new Intent(new_vehicle.this, vehicle_details.class);
-        intent.putExtra("userId",userId);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("userId", userId);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }

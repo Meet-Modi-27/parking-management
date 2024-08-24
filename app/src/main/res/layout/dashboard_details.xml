@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#fff">
+        android:background="#021526">
 
         <TextView
             android:id="@+id/dashboard_name"
@@ -18,10 +18,10 @@
             android:layout_marginEnd="5dp"
             android:fontFamily="@font/corben"
             android:text="Name"
-            android:textColor="#000"
+            android:textColor="#E68369"
             android:textSize="35sp"
             android:textStyle="italic"
-            android:background="#fff"/>
+            android:background="#021526"/>
 
     </LinearLayout>
 

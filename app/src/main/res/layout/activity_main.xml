@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#fff"
+    android:background="#021526"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="#FFBF00">
+        android:background="#e2e2b6">
 
         <ImageView
             android:layout_marginStart="5dp"
@@ -48,7 +48,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,10 +61,10 @@
                 android:layout_height="wrap_content"
                 android:text="Hello,"
                 android:textSize="45sp"
-                android:textColor="#000"
+                android:textColor="#E68369"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/bangers"
+                android:fontFamily="@font/corben"
                 android:padding="0dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -73,7 +74,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="20dp"
                 android:gravity="center"
-                android:background="#fff"/>
+                android:background="#021526"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -81,12 +82,12 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/bangers"
                 android:text="Book A slot"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:textSize="35sp" />
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="350dp">
 
                 <GridLayout
                     android:layout_width="match_parent"
@@ -113,7 +114,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:background="#F4D03F"
+                            android:background="#e2e2b6"
                             android:gravity="center">
 
                             <ImageView
@@ -126,7 +127,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Scan &amp; Park"
                                 android:textAlignment="center"
-                                android:textSize="18sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="#000"
                                 android:layout_marginTop="10dp"/>
@@ -150,7 +151,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:background="#F4D03F"
+                            android:background="#e2e2b6"
                             android:gravity="center">
 
                             <ImageView
@@ -164,7 +165,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Scan &amp; Exit"
                                 android:textAlignment="center"
-                                android:textSize="18sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="#000"/>
 
@@ -187,21 +188,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:background="#F4D03F"
+                            android:background="#e2e2b6"
                             android:gravity="center">
 
                             <ImageView
-                                android:layout_width="80dp"
+                                android:layout_width="76dp"
                                 android:layout_height="80dp"
-                                android:src="@drawable/parking_svgrepo_com"
-                                android:layout_gravity="center"/>
+                                android:layout_gravity="center"
+                                android:src="@drawable/parking_svgrepo_com" />
                             <TextView
                                 android:layout_marginTop="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Available Slots"
                                 android:textAlignment="center"
-                                android:textSize="18sp"
+                                android:textSize="20sp"
                                 android:textStyle="bold"
                                 android:textColor="#000"/>
 
@@ -224,7 +225,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:background="#F4D03F"
+                            android:background="#e2e2b6"
                             android:gravity="center">
 
                             <ImageView
@@ -238,7 +239,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Find the Location"
                                 android:textAlignment="center"
-                                android:textSize="18sp"
+                                android:textSize="19sp"
                                 android:textStyle="bold"
                                 android:textColor="#000"/>
 
@@ -249,7 +250,6 @@
                 </GridLayout>
 
             </ScrollView>
-
         </LinearLayout>
 
     </ScrollView>
@@ -259,5 +259,116 @@
         android:id="@+id/flag"
         android:layout_width="0dp"
         android:layout_height="0dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E2E2B6"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/round_image"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:padding="6dp"
+                android:src="@drawable/home_icon_select"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:text="Home"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:padding="6dp"
+                android:src="@drawable/vehicle_unselect"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:text="Vehicles"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:padding="6dp"
+                android:src="@drawable/history_svgrepo_unselect"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:text="History"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+    </LinearLayout>
 
 </LinearLayout>

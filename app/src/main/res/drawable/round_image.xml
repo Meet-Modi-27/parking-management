@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#000"/>
+    <stroke android:width="0dp"
+        android:color="#ff000000"/>
+
+    <!-- Adjust padding to make it appear stretched -->
+    <padding android:left="24dp"
+        android:top="6dp"
+        android:right="24dp"
+        android:bottom="6dp"/>
+
+    <corners android:radius="50px"/>
+</shape>

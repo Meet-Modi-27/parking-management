@@ -5,33 +5,168 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".vehicle_details"
-    android:background="#fff"
+    android:background="#021526"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="User Details"
+        android:text="Park Me"
         android:textSize="40sp"
         android:textAlignment="center"
+        android:background="#E2E2B6"
         android:textColor="#000"
         android:fontFamily="@font/bangers"/>
-
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/vehicle_rv"
         android:layout_gravity="center"
-        android:layout_margin="10dp"/>
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:fontFamily="@font/bungee"
+        android:text="Your Vehicles"
+        android:layout_marginTop="10dp"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/vehicle_rv"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Add Vehicle Data"
+                android:textColor="#000"
+                android:background="@drawable/button_edit"
+            android:layout_margin="20dp"
+            android:id="@+id/add_vehicle"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Vehicle Data"
-        android:textColor="#fff"
-        android:background="#000"
-        android:layout_margin="20dp"
-        android:id="@+id/add_vehicle"/>
+        android:background="#E2E2B6"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:padding="6dp"
+                android:src="@drawable/home_icon_unselect" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:text="Home"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1">
+        </Space>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/round_image"
+                android:padding="6dp"
+                android:src="@drawable/vehicle_select"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:textStyle="bold"
+                android:text="Vehicles"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="8dp"
+                android:padding="6dp"
+                android:src="@drawable/history_svgrepo_unselect"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:text="History"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" >
+        </Space>
+    </LinearLayout>
 
 </LinearLayout>
