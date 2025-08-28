@@ -12,7 +12,7 @@ A smart Parking Management System that helps users efficiently find and manage p
   📱 Mobile Friendly – Android app built with a simple and clean UI.<br>
 <br>
 
-🛠️ <b> **Tech Stack:** </b><br>
+🛠️ <b> **Tech Stack:** </b>
 
   Frontend (Mobile App): Android (Java)<br>
   Backend: Firebase Realtime Database<br>
@@ -20,7 +20,7 @@ A smart Parking Management System that helps users efficiently find and manage p
   QR Code Integration: ZXing (QR scanner library)<br>
 
 <br>
-🚀 <b> **Usage:** </b><br>
+🚀 <b> **Usage:** </b>
 
   <b>1.</b> Scan QR before parking → Spot marked as Occupied.<br>
 
@@ -29,7 +29,7 @@ A smart Parking Management System that helps users efficiently find and manage p
   <b>3.</b> Admin can monitor parking occupancy in real-time.<br>
 
 <br>
-📌 <b> **Future Enhancements:** </b><br>
+📌 <b> **Future Enhancements:** </b>
 
   🗺️ Integrate with Google Maps for navigation to free spots<br>
 
@@ -37,7 +37,7 @@ A smart Parking Management System that helps users efficiently find and manage p
 
   📍 Support for multiple parking lots<br>
 <br>
-🤝 <b> **Contributing:** </b><br>
+🤝 <b> **Contributing:** </b>
 
 Contributions are welcome!<br>
 
