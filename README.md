@@ -14,10 +14,10 @@ Parking Management System
 
 🛠️ <b> **Tech Stack:** </b>
 
-  &nbsp;Frontend (Mobile App): Android (Java)<br>
-  &nbsp;Backend: Firebase Realtime Database<br>
-  &nbsp;Database: Firebase / SQLite (for offline storage)<br>
-  &nbsp;QR Code Integration: ZXing (QR scanner library)<br>
+  &emsp;**Frontend (Mobile App):** Android (Java)<br>
+  &nbsp;**Backend:** Firebase Realtime Database<br>
+  &nbsp;**Database:** Firebase / SQLite (for offline storage)<br>
+  &nbsp;**QR Code Integration:** ZXing (QR scanner library)<br>
 
 <br>
 🚀 <b> Usage: </b>
