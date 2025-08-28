@@ -22,31 +22,31 @@ Parking Management System
 <br>
 🚀 <b> Usage: </b>
 
-  &emsp;<b>1.</b> Scan QR before parking → Spot marked as Occupied.<br>
+  &emsp;<b>1.</b> Scan QR before parking → Spot marked as Occupied.
 
-  &emsp;<b>2.</b> Scan QR after leaving → Spot marked as Available.<br>
+  &emsp;<b>2.</b> Scan QR after leaving → Spot marked as Available.
 
-  &emsp;<b>3.</b> Admin can monitor parking occupancy in real-time.<br>
+  &emsp;<b>3.</b> Admin can monitor parking occupancy in real-time.
 
 <br>
 📌 <b> Future Enhancements: </b>
 
-&emsp;🗺️ Integrate with Google Maps for navigation to free spots<br>
+&emsp;🗺️ Integrate with Google Maps for navigation to free spots
 
-&emsp;💳 Add payment gateway for paid parking<br>
+&emsp;💳 Add payment gateway for paid parking
 
-&emsp;📍 Support for multiple parking lots<br>
+&emsp;📍 Support for multiple parking lots
 <br>
 🤝 <b> **Contributing:** </b>
 
 Contributions are welcome!<br>
 
-&emsp;- Fork the repo<br>
+&emsp;- Fork the repo
 
-&emsp;- Create a new branch (feature-xyz)<br>
+&emsp;- Create a new branch (feature-xyz)
 
-&emsp;- Submit a pull request<br>
+&emsp;- Submit a pull request
 
-
+<br>
 👨‍💻 <b> **Author**<br>
 Meet Modi </b>
